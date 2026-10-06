@@ -1,86 +1,80 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Library {
+public class Pharmaceutical {
 
-    ArrayList<Book> books = new ArrayList<>();
+    ArrayList<Medicine> medicines = new ArrayList<>();
+    HashMap<Integer, Medicine> medicineMap = new HashMap<>();
 
-    HashMap<Integer, Book> bookMap = new HashMap<>();
+    // Add Medicine
+    public void addMedicine(Medicine medicine) {
 
-
-    // Add Book
-    public void addBook(Book book) {
-
-        if (bookMap.containsKey(book.id)) {
-            System.out.println("Book ID already exists!");
+        if (medicineMap.containsKey(medicine.id)) {
+            System.out.println("Medicine ID already exists!");
             return;
         }
 
-        books.add(book);
-        bookMap.put(book.id, book);
+        medicines.add(medicine);
+        medicineMap.put(medicine.id, medicine);
 
-        System.out.println("Book added successfully!");
+        System.out.println("Medicine added successfully!");
     }
 
-
-    // Search Book by ID
-    public Book searchById(int id) {
-
-        return bookMap.get(id);
+    // Search Medicine by ID
+    public Medicine searchById(int id) {
+        return medicineMap.get(id);
     }
 
+    // Update Medicine
+    public void updateMedicine(int id, String name, String manufacturer,
+                               String category, double price, int quantity) {
 
-    // Update Book
-    public void updateBook(int id, String title, String author, String category) {
+        Medicine medicine = medicineMap.get(id);
 
-        Book book = bookMap.get(id);
+        if (medicine != null) {
 
-        if (book != null) {
+            medicine.name = name;
+            medicine.manufacturer = manufacturer;
+            medicine.category = category;
+            medicine.price = price;
+            medicine.quantity = quantity;
 
-            book.title = title;
-            book.author = author;
-            book.category = category;
-
-            System.out.println("Book updated successfully!");
+            System.out.println("Medicine updated successfully!");
 
         } else {
-
-            System.out.println("Book not found!");
+            System.out.println("Medicine not found!");
         }
     }
 
+    // Delete Medicine
+    public void deleteMedicine(int id) {
 
-    // Delete Book
-    public void deleteBook(int id) {
+        Medicine medicine = medicineMap.get(id);
 
-        Book book = bookMap.get(id);
+        if (medicine != null) {
 
-        if (book != null) {
+            medicines.remove(medicine);
+            medicineMap.remove(id);
 
-            books.remove(book);
-            bookMap.remove(id);
-
-            System.out.println("Book deleted successfully!");
+            System.out.println("Medicine deleted successfully!");
 
         } else {
-
-            System.out.println("Book not found!");
+            System.out.println("Medicine not found!");
         }
     }
 
+    // Display All Medicines
+    public void displayMedicines() {
 
-    // Display All Books
-    public void displayBooks() {
+        System.out.println("\n===== ALL MEDICINES =====");
 
-        System.out.println("\n===== ALL BOOKS =====");
-
-        if (books.isEmpty()) {
-            System.out.println("No books available.");
+        if (medicines.isEmpty()) {
+            System.out.println("No medicines available.");
             return;
         }
 
-        for (Book book : books) {
-            System.out.println(book);
+        for (Medicine medicine : medicines) {
+            System.out.println(medicine);
         }
     }
 }
